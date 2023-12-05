@@ -37,16 +37,18 @@ Write-Log() {
 Write-Log "Watchdog avviato. Log salvato in: $LogFilePath"
 
 # Definisci i tempi di pausa
-InitialPauseTime=180     # 5 minuti all'avvio
+InitialPauseTime=5     # 5 minuti all'avvio
 RecoveryPauseTime=60     # 3 minuti dopo il riavvio del miner
 CooldownTime=1800        # 30 minuti di cooldown dopo 3 riavvii del miner
 RestartThreshold=3       # Numero di riavvii del miner prima del riavvio del computer
-CheckInterval=15         # Intervallo di controllo in secondi
+CheckInterval=3         # Intervallo di controllo in secondi
 
 # Variabili di stato
 restartCount=0
 lastRestartTime=$(date +"%s")
 consecutive_low_usage_count=0
+
+sleep "$InitialPauseTime"
 
 # Ciclo principale
 while true; do
